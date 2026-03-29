@@ -6,16 +6,10 @@
   <title>contextual-ui — Interactive Demo</title>
   <style>
     :root {
-      --bg: #09090b;
-      --surface: #18181b;
-      --surface-2: #27272a;
-      --border: #3f3f46;
-      --text: #fafafa;
-      --text-muted: #a1a1aa;
-      --accent: #3b82f6;
-      --accent-glow: rgba(59, 130, 246, 0.4);
-      --success: #22c55e;
-      --success-glow: rgba(34, 197, 94, 0.3);
+      --bg: #09090b; --surface: #18181b; --surface-2: #27272a;
+      --border: #3f3f46; --text: #fafafa; --text-muted: #a1a1aa;
+      --accent: #3b82f6; --accent-glow: rgba(59,130,246,0.4);
+      --success: #22c55e; --success-glow: rgba(34,197,94,0.3);
       --radius: 12px;
     }
 
@@ -23,10 +17,8 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      padding: 32px 24px;
+      background: var(--bg); color: var(--text);
+      min-height: 100vh; padding: 32px 24px;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -43,7 +35,6 @@
       display: flex; gap: 10px; justify-content: center;
       flex-wrap: wrap; margin-bottom: 40px;
     }
-
     .scenario {
       display: flex; flex-direction: column; align-items: center; gap: 6px;
       padding: 14px 18px; background: var(--surface);
@@ -63,7 +54,6 @@
 
     /* ── Pipeline stepper ── */
     .pipeline { position: relative; margin-bottom: 32px; padding: 0 48px; }
-
     .pipeline-track {
       position: absolute; top: 6px;
       left: calc(12.5% + 7px); right: calc(12.5% + 7px);
@@ -73,14 +63,11 @@
       height: 100%; width: 0%; background: var(--accent);
       border-radius: 1px; transition: width 0.4s ease-out;
     }
-
     .pipeline-steps {
       display: flex; justify-content: space-between;
       position: relative; z-index: 1;
     }
-
     .step { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 80px; }
-
     .step-dot {
       width: 14px; height: 14px; border-radius: 50%;
       background: var(--surface-2); border: 2px solid var(--border);
@@ -95,13 +82,11 @@
       background: var(--success); border-color: var(--success);
       box-shadow: 0 0 8px var(--success-glow); animation: none;
     }
-
     .step-label {
       font-size: 11px; font-weight: 700; text-transform: uppercase;
       letter-spacing: 0.5px; color: var(--text-muted); transition: color 0.3s ease;
     }
     .step.active .step-label, .step.complete .step-label { color: var(--text); }
-
     .step-detail {
       font-size: 11px; color: var(--accent);
       font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
@@ -115,59 +100,20 @@
       50% { box-shadow: 0 0 24px var(--accent-glow); }
     }
 
-    /* ── Output area ── */
+    /* ── Canvas output ── */
     .output-area {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--radius); overflow: hidden;
     }
-
-    .output-frame {
-      position: relative; min-height: 460px;
-      background: #ffffff; color: #1a1a1a;
-      margin: 12px; border-radius: 8px; overflow: hidden;
+    .canvas-frame {
+      position: relative; margin: 12px;
+      border-radius: 8px; overflow: hidden; background: #0c0c14;
     }
-
-    .output-pane { position: relative; width: 100%; min-height: 460px; }
-
-    .skeleton-overlay {
-      position: absolute; inset: 0; z-index: 10;
-      pointer-events: none;
-      transition: opacity 0.5s ease-out;
-    }
-    .skeleton-overlay.active { background: #fff; }
-    .skeleton-overlay.fade-out { opacity: 0; }
-
-    .skeleton-box {
-      position: absolute; border: 2px dashed #d4d4d8; border-radius: 8px;
-      overflow: hidden; opacity: 0;
-      animation: skeletonIn 0.35s ease-out forwards;
-    }
-    .skeleton-box::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.03) 50%, transparent 100%);
-      animation: shimmer 1.5s ease-in-out infinite;
-    }
-    .skeleton-label {
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 11px; color: #a1a1aa;
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      z-index: 1;
-    }
-
-    @keyframes skeletonIn {
-      from { opacity: 0; transform: scale(0.92); }
-      to   { opacity: 1; transform: scale(1); }
-    }
-    @keyframes shimmer {
-      0%   { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
-
+    #output-canvas { display: block; width: 100%; border-radius: 8px; }
     .output-empty {
       position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
-      color: #a1a1aa; font-size: 15px; z-index: 5;
+      color: #4a4a5a; font-size: 15px; z-index: 5;
       transition: opacity 0.3s ease;
     }
     .output-empty.hidden { opacity: 0; pointer-events: none; }
@@ -181,7 +127,6 @@
       .pipeline { padding: 0 20px; }
       .step { min-width: 60px; }
       .step-label { font-size: 10px; }
-      .output-frame { min-height: 350px; margin: 8px; }
     }
   </style>
 </head>
@@ -249,9 +194,8 @@
     </section>
 
     <section class="output-area">
-      <div class="output-frame" id="output-frame">
-        <div class="output-pane" id="output-pane"></div>
-        <div class="skeleton-overlay" id="skeleton"></div>
+      <div class="canvas-frame" id="canvas-frame">
+        <canvas id="output-canvas"></canvas>
         <div class="output-empty" id="output-empty">
           <p>👆 Pick a scenario to see the magic</p>
         </div>
