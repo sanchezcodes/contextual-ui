@@ -31,7 +31,7 @@ export function layout(intent: LayoutIntent, viewport: Viewport): LayoutTree {
   const children: LayoutNode[] = sized.map((sc, i) => {
     const pos = positions[i]!
     return {
-      type: sc.intent.kind === 'json-viewer' ? 'text-block' : sc.intent.kind,
+      type: sc.intent.kind,
       bounds: {
         x: pos.x,
         y: pos.y,
