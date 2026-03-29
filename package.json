@@ -5,7 +5,9 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "build:demo": "bun build demo/main.ts --outdir demo/dist --bundle",
+    "demo": "bun build demo/main.ts --outdir demo/dist --bundle && open demo/index.html"
   },
   "devDependencies": {
     "typescript": "^5.7.3",
