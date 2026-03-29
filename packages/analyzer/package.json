@@ -1,0 +1,14 @@
+{
+  "name": "@contextual-ui/analyzer",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "files": ["src", "dist"],
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@contextual-ui/core": "workspace:*"
+  }
+}
