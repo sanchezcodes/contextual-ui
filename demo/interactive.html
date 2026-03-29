@@ -123,16 +123,18 @@
 
     .output-frame {
       position: relative; min-height: 460px;
-      background: #ffffff; margin: 12px; border-radius: 8px; overflow: hidden;
+      background: #ffffff; color: #1a1a1a;
+      margin: 12px; border-radius: 8px; overflow: hidden;
     }
 
     .output-pane { position: relative; width: 100%; min-height: 460px; }
 
     .skeleton-overlay {
       position: absolute; inset: 0; z-index: 10;
-      pointer-events: none; background: #fff;
+      pointer-events: none;
       transition: opacity 0.5s ease-out;
     }
+    .skeleton-overlay.active { background: #fff; }
     .skeleton-overlay.fade-out { opacity: 0; }
 
     .skeleton-box {
@@ -199,7 +201,7 @@
       <button class="scenario" data-id="products">
         <span class="scenario-icon">📊</span>
         <span class="scenario-question">What sells the most?</span>
-        <span class="scenario-meta">5 categories</span>
+        <span class="scenario-meta">10 data points</span>
       </button>
       <button class="scenario" data-id="team">
         <span class="scenario-icon">👥</span>

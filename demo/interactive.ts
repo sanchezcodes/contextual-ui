@@ -18,29 +18,34 @@ const SCENARIOS: Record<string, Scenario> = {
     id: 'sales',
     intent: 'visualize',
     data: [
-      { month: '2026-01', revenue: 45000 },
-      { month: '2026-02', revenue: 48000 },
-      { month: '2026-03', revenue: 52000 },
-      { month: '2026-04', revenue: 49000 },
-      { month: '2026-05', revenue: 55000 },
-      { month: '2026-06', revenue: 61000 },
-      { month: '2026-07', revenue: 58000 },
-      { month: '2026-08', revenue: 63000 },
-      { month: '2026-09', revenue: 67000 },
-      { month: '2026-10', revenue: 71000 },
-      { month: '2026-11', revenue: 74000 },
-      { month: '2026-12', revenue: 80000 },
+      { month: '2026-01', value: 45000 },
+      { month: '2026-02', value: 48000 },
+      { month: '2026-03', value: 52000 },
+      { month: '2026-04', value: 49000 },
+      { month: '2026-05', value: 55000 },
+      { month: '2026-06', value: 61000 },
+      { month: '2026-07', value: 58000 },
+      { month: '2026-08', value: 63000 },
+      { month: '2026-09', value: 67000 },
+      { month: '2026-10', value: 71000 },
+      { month: '2026-11', value: 74000 },
+      { month: '2026-12', value: 80000 },
     ],
   },
   products: {
     id: 'products',
     intent: 'visualize',
     data: [
+      { category: 'Electronics', value: 42000 },
       { category: 'Electronics', value: 45200 },
       { category: 'Clothing', value: 28900 },
+      { category: 'Clothing', value: 31200 },
       { category: 'Home & Garden', value: 18400 },
+      { category: 'Home & Garden', value: 19800 },
       { category: 'Sports', value: 15300 },
+      { category: 'Sports', value: 14100 },
       { category: 'Books', value: 9100 },
+      { category: 'Books', value: 10200 },
     ],
   },
   team: {
@@ -144,8 +149,9 @@ function getLeafNodes(node: LayoutNode): LayoutNode[] {
 
 function showSkeleton(tree: LayoutTree): void {
   skeletonEl.innerHTML = ''
-  skeletonEl.style.opacity = '1'
+  skeletonEl.style.removeProperty('opacity')
   skeletonEl.classList.remove('fade-out')
+  skeletonEl.classList.add('active')
 
   const leaves = getLeafNodes(tree)
   leaves.forEach((node, i) => {
@@ -302,8 +308,8 @@ async function runScenario(scenario: Scenario): Promise<void> {
     resetPipeline()
     outputPane.innerHTML = ''
     skeletonEl.innerHTML = ''
-    skeletonEl.style.opacity = '1'
-    skeletonEl.classList.remove('fade-out')
+    skeletonEl.style.removeProperty('opacity')
+    skeletonEl.classList.remove('fade-out', 'active')
     outputEmpty.classList.add('hidden')
 
     // ── Step 1: Data ──
