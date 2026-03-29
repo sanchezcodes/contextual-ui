@@ -1,1 +1,1 @@
-export {}
+export { renderCanvas } from './render'
