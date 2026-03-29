@@ -33,6 +33,7 @@ export type LayoutNodeType =
   | 'grid'
   | 'stack'
   | 'split-view'
+  | 'json-viewer'
 
 export interface LayoutNode {
   type: LayoutNodeType

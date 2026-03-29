@@ -10,5 +10,8 @@
   },
   "dependencies": {
     "@contextual-ui/core": "workspace:*"
+  },
+  "devDependencies": {
+    "happy-dom": "^17.4.4"
   }
 }
