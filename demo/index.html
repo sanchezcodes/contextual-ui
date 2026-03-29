@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>contextual-ui demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #f0f1f3;
+      color: #1a1a1a;
+      padding: 24px;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    h1 span { color: #888; font-weight: 400; }
+
+    .samples {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .samples button {
+      padding: 6px 14px;
+      border: 1px solid #d0d0d0;
+      border-radius: 6px;
+      background: #fff;
+      font-size: 13px;
+      cursor: pointer;
+      color: #333;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .samples button:hover {
+      background: #e8e8e8;
+      border-color: #aaa;
+    }
+
+    .samples button.active {
+      background: #333;
+      color: #fff;
+      border-color: #333;
+    }
+
+    textarea {
+      width: 100%;
+      height: 180px;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 13px;
+      padding: 12px;
+      border: 1px solid #d0d0d0;
+      border-radius: 8px;
+      background: #fff;
+      resize: vertical;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    textarea:focus { outline: none; border-color: #888; }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .controls label {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .controls select {
+      padding: 6px 12px;
+      border: 1px solid #d0d0d0;
+      border-radius: 6px;
+      background: #fff;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .controls button {
+      padding: 8px 20px;
+      border: none;
+      border-radius: 6px;
+      background: #333;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .controls button:hover { background: #555; }
+
+    .error {
+      display: none;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      border-radius: 6px;
+      background: #fef2f2;
+      border: 1px solid #fca5a5;
+      color: #b91c1c;
+      font-size: 13px;
+      font-family: monospace;
+    }
+
+    .outputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .output-panel {
+      background: #fff;
+      border: 1px solid #d0d0d0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .output-panel h2 {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #888;
+      padding: 10px 14px;
+      border-bottom: 1px solid #eee;
+      background: #fafafa;
+    }
+
+    .output-panel .panel-body {
+      padding: 12px;
+      min-height: 500px;
+      position: relative;
+      overflow: auto;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .outputs { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <h1>contextual-ui <span>demo</span></h1>
+
+  <div class="samples">
+    <button data-sample="sales">Sales timeseries</button>
+    <button data-sample="categories">Categories</button>
+    <button data-sample="team">Team roster</button>
+    <button data-sample="server">Server status</button>
+    <button data-sample="article">Article text</button>
+  </div>
+
+  <textarea id="data-input" spellcheck="false"></textarea>
+
+  <div class="controls">
+    <label for="intent-select">Intent:</label>
+    <select id="intent-select">
+      <option value="visualize">visualize</option>
+      <option value="compare">compare</option>
+      <option value="detail">detail</option>
+      <option value="list">list</option>
+      <option value="summarize">summarize</option>
+    </select>
+    <button id="render-btn">Render</button>
+  </div>
+
+  <div id="error-output" class="error"></div>
+
+  <div class="outputs">
+    <div class="output-panel">
+      <h2>DOM Output</h2>
+      <div id="dom-output" class="panel-body"></div>
+    </div>
+    <div class="output-panel">
+      <h2>Canvas Output</h2>
+      <div class="panel-body">
+        <canvas id="canvas-output"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script src="dist/main.js"></script>
+</body>
+</html>
