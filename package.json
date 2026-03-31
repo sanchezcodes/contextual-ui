@@ -7,7 +7,9 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "build:demo": "bun build demo/main.ts --outdir demo/dist --bundle",
-    "demo": "bun build demo/main.ts --outdir demo/dist --bundle && cd demo && python3 -m http.server 8765"
+    "demo": "bun build demo/main.ts --outdir demo/dist --bundle && cd demo && python3 -m http.server 8765",
+    "build:interactive": "bun build demo/interactive.ts --outdir demo/dist --bundle",
+    "interactive": "bun build demo/interactive.ts --outdir demo/dist --bundle && cd demo && python3 -m http.server 8765"
   },
   "devDependencies": {
     "typescript": "^5.7.3",
