@@ -1,0 +1,4 @@
+# Temporary: supply chain protection (axios 1.14.1 attack, 2026-03-31)
+# Remove or adjust once npm ecosystem stabilizes
+[install]
+minimumReleaseAge = 259200
